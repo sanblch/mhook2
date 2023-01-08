@@ -1,0 +1,14 @@
+BasedOnStyle: Google
+NamespaceIndentation: All
+BreakBeforeBinaryOperators: NonAssignment
+AlignOperands: true
+DerivePointerAlignment: false
+PointerAlignment: Right
+BinPackArguments: false
+BinPackParameters: false
+AllowShortFunctionsOnASingleLine: Empty
+IncludeBlocks: Preserve
+# не шакалить комментарии для Doxygen
+# https://stackoverflow.com/questions/48016641/force-clang-format-to-respect-doxygen-block-comments
+CommentPragmas:  '^@.+'
+

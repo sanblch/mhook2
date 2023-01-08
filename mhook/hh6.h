@@ -4,17 +4,18 @@
 
 #include "HookHandler.h"
 
-class MHookHandler6:public MHookHandler
-{
-public:
-	virtual int OnMouseMove(LONG _x, LONG _y);
-	virtual void OnMouseScroll(LONG _x, LONG _y); // Единственный хендлер, где эта функция перегружена
-	virtual bool OnRDown();
-	virtual bool OnRUp();
-	virtual void OnTimer();
-	virtual void Halt();
-protected:
-	DWORD last_time;
+class MHookHandler6 : public MHookHandler {
+ public:
+  virtual int OnMouseMove(LONG _x, LONG _y);
+  virtual void OnMouseScroll(
+      LONG _x, LONG _y);  // Единственный хендлер, где эта функция перегружена
+  virtual bool OnRDown();
+  virtual bool OnRUp();
+  virtual void OnTimer();
+  virtual void Halt();
+
+ protected:
+  DWORD last_time;
 };
 
 #endif

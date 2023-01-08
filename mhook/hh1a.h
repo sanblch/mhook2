@@ -4,15 +4,17 @@
 
 #include "HookHandler.h"
 
-class MHookHandler1a:public MHookHandler
-{
-public:
-	virtual int OnMouseMove(LONG _x, LONG _y);
-	virtual bool OnRDown();
-	virtual bool OnRUp();
-	virtual int GetPosition() { return position_mem;}
-protected:
-	DWORD last_time;
+class MHookHandler1a : public MHookHandler {
+ public:
+  virtual int OnMouseMove(LONG _x, LONG _y);
+  virtual bool OnRDown();
+  virtual bool OnRUp();
+  virtual int GetPosition() {
+    return position_mem;
+  }
+
+ protected:
+  DWORD last_time;
 };
 
 #endif
