@@ -1,10 +1,11 @@
 ﻿// Большая часть содрана из WAVStream, а тот из GZSamplesHolder2
 
-#include "WAVLoader.h"
 #include <Windows.h>
+
 #include <math.h>
 #include <stdio.h>
 #include "MMGlobals.h"
+#include "WAVLoader.h"
 
 extern bool f_reading_file;  // определено в InputThread.cpp, хотя красивее было
                              // бы сделать её атрибутом класса, но лень уже.

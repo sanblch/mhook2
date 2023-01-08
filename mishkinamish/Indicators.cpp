@@ -1,5 +1,6 @@
-﻿#include "Indicators.h"
-#include <Windows.h>
+﻿#include <Windows.h>
+
+#include "Indicators.h"
 #include "KChFstate.h"
 #include "MMGlobals.h"
 #include "WorkerThread.h"
@@ -124,7 +125,7 @@ void Indicators::Init(HWND _hdwnd) {
               (i + 1) * vert_increase - 2);
       // Arc(memdc,j*hor_increase+2, i*vert_increase+2, (j+1)*hor_increase-2,
       // (i+1)*vert_increase-2, 	j*hor_increase+hor_increase/2,
-      //i*vert_increase+2, j*hor_increase+hor_increase/2, i*vert_increase+2);
+      // i*vert_increase+2, j*hor_increase+hor_increase/2, i*vert_increase+2);
 
       // Красиво не получилось, оставим на потом
       /*

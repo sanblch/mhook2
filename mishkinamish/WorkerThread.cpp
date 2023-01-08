@@ -1,5 +1,5 @@
-﻿#include "WorkerThread.h"
-#include <Windows.h>
+﻿#include <Windows.h>
+
 #include <math.h>
 #include <process.h>
 #include "ClickSound.h"
@@ -7,6 +7,7 @@
 #include "KChFstate.h"
 #include "WAVDump.h"
 #include "WAVLoader.h"
+#include "WorkerThread.h"
 
 #define MM_WORKER_BUFFERS_IN_CIRCLE 4
 

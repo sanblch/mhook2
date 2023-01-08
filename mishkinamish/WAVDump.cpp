@@ -1,6 +1,7 @@
-﻿#include "WAVDump.h"
-#include <Windows.h>
+﻿#include <Windows.h>
+
 #include <stdio.h>
+#include "WAVDump.h"
 #include "resource.h"
 
 static char dump_filename[1024], dump_filename_rename[1024];

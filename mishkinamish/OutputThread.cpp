@@ -1,7 +1,8 @@
-﻿#include "OutputThread.h"
-#include <Windows.h>
+﻿#include <Windows.h>
+
 #include <math.h>
 #include <process.h>
+#include "OutputThread.h"
 #include "WorkerThread.h"
 
 #define PI 3.1415926535

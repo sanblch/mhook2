@@ -1,4 +1,5 @@
 ﻿#include <Windows.h>
+
 #include "Indicators.h"
 #include "InputThread.h"
 #include "KChFstate.h"
@@ -14,7 +15,7 @@ unsigned long
     iNumDevs;  // Эту переменную иcпользуем при InputThread::Start,чтобы понять,
                // что выбрали файл, а не устройство
 HINSTANCE
-    GZInst;  // Присваивается в начале программы и используется затем всеми
+GZInst;  // Присваивается в начале программы и используется затем всеми
 HWND hdwnd;
 
 HBITMAP hbm_exclaim = 0, hbm_up, hbm_left, hbm_down, hbm_right;

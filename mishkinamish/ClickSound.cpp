@@ -1,6 +1,7 @@
-﻿#include "ClickSound.h"
-#include <Windows.h>
+﻿#include <Windows.h>
+
 #include <math.h>
+#include "ClickSound.h"
 
 bool ClickSound::initialized = false;
 int ClickSound::remaining_samples = 0;

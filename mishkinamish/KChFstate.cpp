@@ -1,6 +1,7 @@
-﻿#include "KChFstate.h"
-#include <Windows.h>
+﻿#include <Windows.h>
+
 #include "Indicators.h"
+#include "KChFstate.h"
 
 volatile int KChFstate::state(0), KChFstate::minlevel(0), KChFstate::counter(0);
 volatile bool KChFstate::flag_kc_anytime = false;

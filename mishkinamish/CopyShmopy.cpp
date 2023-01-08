@@ -1,4 +1,5 @@
 ﻿#include <Windows.h>
+
 #include <math.h>
 #include "ipp.h"
 
@@ -100,7 +101,8 @@ void CopyShmopy::Process(short *dest, short *src) {
   // всё на DFT_SIZE !!! Иначе будет слишком громко !!!
   // if(f_reading_file) divide_by_N=(float)DFT_SIZE; else divide_by_N=1.0f;
   for (i = 0; i < MM_SOUND_BUFFER_LEN; i++) {
-    InputDoubleBuffer[MM_SOUND_BUFFER_LEN + i] = (float)src[i];  /// divide_by_N;
+    InputDoubleBuffer[MM_SOUND_BUFFER_LEN + i] =
+        (float)src[i];  /// divide_by_N;
   }
 
   // 1.2. Разгребаем, пока есть что

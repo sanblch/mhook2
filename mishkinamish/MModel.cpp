@@ -1,7 +1,8 @@
-﻿#include "MModel.h"
-#include <Windows.h>
+﻿#include <Windows.h>
+
 #include <gl/GL.h>
 #include <stdio.h>
+#include "MModel.h"
 //#include "casphinx.h"
 #include "CopyShmopy.h"
 #include "KChFstate.h"

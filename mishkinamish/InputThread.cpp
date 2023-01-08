@@ -1,6 +1,7 @@
-﻿#include "InputThread.h"
-#include <Windows.h>
+﻿#include <Windows.h>
+
 #include <process.h>
+#include "InputThread.h"
 #include "OutputThread.h"
 #include "WAVLoader.h"
 #include "WorkerThread.h"

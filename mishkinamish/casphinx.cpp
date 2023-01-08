@@ -1,7 +1,8 @@
-﻿#include "casphinx.h"
-#include <Windows.h>
+﻿#include <Windows.h>
+
 #include <math.h>
 #include "MMGlobals.h"
+#include "casphinx.h"
 
 //==============================================================================================================
 // Алгоритм подсчёта MFCC изначально был позаимствован из CMU Sphinx, затем
