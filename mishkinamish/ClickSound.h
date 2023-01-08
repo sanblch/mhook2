@@ -3,16 +3,17 @@
 
 #include "MMGlobals.h"
 
-#define MM_CLICK_SAMPLES (MM_SOUND_BUFFER_LEN/2)
+#define MM_CLICK_SAMPLES (MM_SOUND_BUFFER_LEN / 2)
 
-class ClickSound
-{
-public:
-	static void Init();
-	static void AddSound(short *buf, int daite_dve); // Умещается в один буфер, поэтому делаем проще
-protected:
-	static bool initialized;
-	static int remaining_samples;
-	static short ClickSound::samples[2][MM_CLICK_SAMPLES];
+class ClickSound {
+ public:
+  static void Init();
+  static void AddSound(
+      short *buf,
+      int daite_dve);  // Умещается в один буфер, поэтому делаем проще
+ protected:
+  static bool initialized;
+  static int remaining_samples;
+  static short ClickSound::samples[2][MM_CLICK_SAMPLES];
 };
 #endif
