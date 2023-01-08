@@ -1,4 +1,5 @@
 ﻿#include <Windows.h>
+
 #include "CircleWindow.h"
 #include "MagicWindow.h"
 #include "Settings.h"
@@ -108,17 +109,18 @@ int IDC_EDIT_WHEIGHTS[NUM_MAGIC_WINDOWS] = {
     IDC_EDIT_WHEIGHT22, IDC_EDIT_WHEIGHT23, IDC_EDIT_WHEIGHT24};
 
 #define MH_NUM_SENS 2
-TCHAR *dlg_sens[MH_NUM_SENS] = {L"мышь", L"айтрекер"};
+const wchar_t *dlg_sens[MH_NUM_SENS] = {L"мышь", L"айтрекер"};
 
 #define MH_NUM_COLORS 4
-TCHAR *dlg_colors[MH_NUM_COLORS] = {
+const wchar_t *dlg_colors[MH_NUM_COLORS] = {
     L"зелёный", L"жёлтый", L"красный", L"синий"};
 
 #define MH_NUM_REPEAT 2
-TCHAR *dlg_wrepeat[MH_NUM_REPEAT] = {L"кнопка", L"переключатель"};
+const wchar_t *dlg_wrepeat[MH_NUM_REPEAT] = {L"кнопка", L"переключатель"};
 
 #define MH_NUM_GROUPS 5
-TCHAR *dlg_wgroup[MH_NUM_GROUPS] = {L"без группы", L"1", L"2", L"3", L"4"};
+const wchar_t *dlg_wgroup[MH_NUM_GROUPS] = {
+    L"без группы", L"1", L"2", L"3", L"4"};
 
 //===================================================================================================
 // Функция соединения/разъединения от айтреекера

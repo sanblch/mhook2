@@ -1,7 +1,8 @@
-﻿#include "TobiiREX.h"
-#include <Windows.h>
+﻿#include <Windows.h>
+
 #include <process.h>
 #include "MHRepErr.h"
+#include "TobiiREX.h"
 
 static uintptr_t tobii_thread_handler;  // Хендлер потока для Gaze SDK
 

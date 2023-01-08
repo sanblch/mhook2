@@ -43,7 +43,7 @@ class MHSettings {
       flag_up_immediately;
   static int mode, mode3axe;
   static int circle_scale_factor;
-  static int OpenMHookConfig(HWND hwnd, TCHAR *default_filename = NULL);
+  static int OpenMHookConfig(HWND hwnd, const wchar_t *default_filename = NULL);
   static int SaveMHookConfig(HWND hwnd);
   static void FillDialogue(HWND hdwnd);
   static void AfterLoad(HWND hdwnd);
@@ -60,12 +60,12 @@ class MHSettings {
 };
 
 typedef struct {
-  TCHAR *stroka;
+  const wchar_t *stroka;
   int value;
 } MHIntChar;
 
 typedef struct {
-  TCHAR *stroka;
+  const wchar_t *stroka;
   WORD value;
 } MHWORDChar;
 

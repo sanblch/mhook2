@@ -1,10 +1,11 @@
-﻿#include "Settings.h"
+﻿#include <Windows.h>
+
 #include <stdio.h>
-#include <windows.h>
 #include "MHKeypad.h"
 #include "MHRepErr.h"
 #include "MVector.h"
 #include "MagicWindow.h"
+#include "Settings.h"
 #include "hh1.h"
 #include "hh1a.h"
 #include "hh2.h"
@@ -28,7 +29,7 @@ extern bool flag_left_button_waits;
 extern bool flag_right_button_waits;
 extern int top_position;
 
-static TCHAR *filter_MHOOK = L"файлы MHOOK\0*.MHOOK\0\0";
+static const wchar_t *filter_MHOOK = L"файлы MHOOK\0*.MHOOK\0\0";
 static TCHAR tfilename[1258];
 // static char tfiletitle[1258]={"default.MHOOK"};
 static TCHAR tfiletitle[1258];
@@ -761,7 +762,7 @@ typedef enum {
 } T_save_type;
 
 typedef struct {
-  char *name;  // Название в файле конфигурации
+  const char *name;  // Название в файле конфигурации
   T_save_type save_type;
   void *pointer;
   T_save_type check_type;
@@ -999,7 +1000,7 @@ static T_save_struct save_struct[NUM_SAVE_LINES] = {
      0}  // 39 - сохраняет ВСЕ MagicWindows одним махом
 };
 
-int MHSettings::OpenMHookConfig(HWND hwnd, TCHAR *default_filename) {
+int MHSettings::OpenMHookConfig(HWND hwnd, const wchar_t *default_filename) {
   if (NULL == default_filename) {
     // выводим диалог
     OPENFILENAME ofn = {sizeof(OPENFILENAME),

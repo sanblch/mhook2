@@ -1,4 +1,5 @@
 ﻿#include <Windows.h>
+
 #include "Bitmap.h"
 #include "MagicWindow.h"
 #include "Settings.h"

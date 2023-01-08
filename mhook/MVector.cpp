@@ -1,6 +1,7 @@
-﻿#include "MVector.h"
-#include <Windows.h>
+﻿#include <Windows.h>
+
 #include <math.h>
+#include "MVector.h"
 #include "Settings.h"
 
 extern LONG quad_x, quad_y;  // Координаты квадратика в окне

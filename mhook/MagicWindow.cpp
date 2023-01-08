@@ -1,6 +1,7 @@
-﻿#include "MagicWindow.h"
-#include <Windows.h>
+﻿#include <Windows.h>
+
 #include "MHRepErr.h"
+#include "MagicWindow.h"
 #include "Settings.h"
 
 bool flag_magic_left_click = false;
@@ -649,7 +650,7 @@ void MagicWindow::Init() {
   int i;
   // BOOL boolresult;
   ATOM aresult;  // Для всяких кодов возврата
-  TCHAR *MHMagicWindowCName = L"MHMagic20";
+  const wchar_t *MHMagicWindowCName = L"MHMagic20";
 
   if (initialized) return;
   // 1. Регистрация класса окна

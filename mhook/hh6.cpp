@@ -1,8 +1,9 @@
-﻿#include "hh6.h"
-#include <Windows.h>
+﻿#include <Windows.h>
+
 #include "MHKeypad.h"
 #include "MVector.h"
 #include "Settings.h"
+#include "hh6.h"
 
 extern LONG screen_x_real, screen_y_real;
 extern HWND MHhwnd;

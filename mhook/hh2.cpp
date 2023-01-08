@@ -1,8 +1,9 @@
-﻿#include "hh2.h"
-#include <Windows.h>
+﻿#include <Windows.h>
+
 #include "MHKeypad.h"
 #include "MVector.h"
 #include "Settings.h"
+#include "hh2.h"
 
 extern LONG screen_x, screen_y;
 extern HWND MHhwnd;

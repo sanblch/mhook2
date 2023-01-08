@@ -1,8 +1,9 @@
-﻿#include "hh1a.h"
-#include <Windows.h>
+﻿#include <Windows.h>
+
 #include "MHKeypad.h"
 #include "MVector.h"
 #include "Settings.h"
+#include "hh1a.h"
 
 extern LONG screen_x, screen_y;
 

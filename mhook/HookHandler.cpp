@@ -1,5 +1,6 @@
-﻿#include "HookHandler.h"
-#include <Windows.h>
+﻿#include <Windows.h>
+
+#include "HookHandler.h"
 #include "Settings.h"
 
 extern HWND MHhwnd;

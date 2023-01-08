@@ -1,9 +1,10 @@
-﻿#include "TET.h"
-#include <Windows.h>
+﻿#include <Windows.h>
+
 #include <process.h>
 #include <stdio.h>
 #include <winsock.h>
 #include "MHRepErr.h"
+#include "TET.h"
 #include "TobiiREX.h"
 
 // Прототип callback-функции из OnGazeData.cpp
@@ -16,12 +17,12 @@ extern LONG screen_x, screen_y;
 extern double screen_scale;
 
 // The only two messages that we send to the server
-char *JSON_heart_beat = "{\"category\":\"heartbeat\"}";
-char *JSON_set_push =
+const char *JSON_heart_beat = "{\"category\":\"heartbeat\"}";
+const char *JSON_set_push =
     "{\"category\":\"tracker\",\"request\":\"set\",\"values\":{\"push\":true,"
     "\"version\":1}}";
 // Scanf template for the frame (containing "fix:false")
-char *JSON_frame_false =
+const char *JSON_frame_false =
     "{\"category\":\"tracker\",\"request\":\"get\",\"statuscode\":200,"
     "\"values\":{\"frame\":{"
     "\"avg\":{\"x\":%f,\"y\":%f},\"fix\":false,\"lefteye\":{\"avg\":{\"x\":%f,"
@@ -31,7 +32,7 @@ char *JSON_frame_false =
     ",\"y\":%f},\"pcenter\":{\"x\":%f,\"y\":%f},\"psize\":%f,\"raw\":{\"x\":%f"
     ",\"y\":%f}},\"state\":%d,\"time\":%d}}}";
 // Scanf template for the frame (containing "fix:true")
-char *JSON_frame_true =
+const char *JSON_frame_true =
     "{\"category\":\"tracker\",\"request\":\"get\",\"statuscode\":200,"
     "\"values\":{\"frame\":{"
     "\"avg\":{\"x\":%f,\"y\":%f},\"fix\":true,\"lefteye\":{\"avg\":{\"x\":%f,"
@@ -174,7 +175,7 @@ static int TETconnect(HWND hwnd) {
   WORD sockVersion;
   WSADATA wsaData;
   int nret;
-  TCHAR *err_string;
+  const wchar_t *err_string;
 
   SOCKADDR_IN TETserver;
 

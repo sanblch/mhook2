@@ -1,4 +1,5 @@
 ﻿#include <Windows.h>
+
 #include <process.h>
 #include "CircleWindow.h"
 #include "MHRepErr.h"

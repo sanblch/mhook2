@@ -1,8 +1,9 @@
-﻿#include "hh1.h"
-#include <Windows.h>
+﻿#include <Windows.h>
+
 #include "MHKeypad.h"
 #include "MVector.h"
 #include "Settings.h"
+#include "hh1.h"
 
 #ifdef _DEBUG
 //#include <stdio.h>

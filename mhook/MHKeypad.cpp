@@ -1,5 +1,6 @@
-﻿#include "MHKeypad.h"
-#include <Windows.h>
+﻿#include <Windows.h>
+
+#include "MHKeypad.h"
 #include "MHRepErr.h"
 #include "Settings.h"
 

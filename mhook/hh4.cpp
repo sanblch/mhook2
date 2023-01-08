@@ -1,8 +1,9 @@
-﻿#include "hh4.h"
-#include <Windows.h>
+﻿#include <Windows.h>
+
 #include "MHKeypad.h"
 #include "MVector.h"
 #include "Settings.h"
+#include "hh4.h"
 
 extern HWND MHhwnd;
 

@@ -1,5 +1,6 @@
-#include "CircleWindow.h"
 #include <Windows.h>
+
+#include "CircleWindow.h"
 #include "MHRepErr.h"
 #include "WM_USER_messages.h"
 
@@ -49,7 +50,7 @@ LRESULT CALLBACK CircleTranspWndProc(HWND hwnd,
 // Создание окна
 int CircleWindow::Init() {
   ATOM aresult;  // Для всяких кодов возврата
-  TCHAR *CircleWindowCName = L"MhookCircleWindow1.0";
+  const wchar_t *CircleWindowCName = L"MhookCircleWindow1.0";
 
   // 1. Регистрация класса окна
   WNDCLASS wcl = {CS_HREDRAW | CS_VREDRAW,

@@ -1,8 +1,9 @@
-﻿#include "hh5.h"
-#include <Windows.h>
+﻿#include <Windows.h>
+
 #include "MHKeypad.h"
 #include "MVector.h"
 #include "Settings.h"
+#include "hh5.h"
 
 extern LONG screen_x, screen_y;
 static bool movement_happened = false;

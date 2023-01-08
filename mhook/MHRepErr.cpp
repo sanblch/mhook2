@@ -2,18 +2,19 @@
  *	Сообщает об ошибках времени исполнения
  */
 
-#include "MHRepErr.h"
+#include <Windows.h>
+
 #include <stdio.h>
 #include <time.h>
-#include <windows.h>
+#include "MHRepErr.h"
 
 typedef __declspec(dllimport) const
     char *(__cdecl *type_tobiigaze_get_error_message)(int error_code);
 extern type_tobiigaze_get_error_message fp_tobiigaze_get_error_message;
 
 // Сообщает о СИСТЕМНЫХ ошибках времени исполнения
-void MHReportError(TCHAR *SourceFile,
-                   TCHAR *FuncName,
+void MHReportError(const wchar_t *SourceFile,
+                   const wchar_t *FuncName,
                    int LineNumber,
                    HWND hwnd) {
   DWORD res;             // Результат функции FormatMessage
@@ -62,7 +63,7 @@ void MHReportError(TCHAR *SourceFile,
 
 // Для НЕсистемных ошибок (перегружена)
 // Реально не видел, где бы она использовалась
-void MHReportError(TCHAR *Error, HWND hwnd) {
+void MHReportError(const wchar_t *Error, HWND hwnd) {
   //Печатаем сообщение об ошибке (если возможно, на экран)
   MessageBox(hwnd, Error, L"Непорядок!", MB_OK | MB_ICONINFORMATION);
 }
@@ -71,8 +72,8 @@ void MHReportError(TCHAR *Error, HWND hwnd) {
 // Для ошибок Tobii Gaze SDK (перегружена)
 //============================================================================================
 void MHReportError(int tbg_error_code,
-                   TCHAR *SourceFile,
-                   TCHAR *FuncName,
+                   const wchar_t *SourceFile,
+                   const wchar_t *FuncName,
                    int LineNumber,
                    HWND hwnd) {
   TCHAR ARCMessage[1024];  // Это строка, в которой формируется сообщение об

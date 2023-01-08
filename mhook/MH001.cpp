@@ -1,4 +1,5 @@
 ﻿#include <Windows.h>
+
 //#include <stdio.h>
 #include "Bitmap.h"
 //#include "MVector.h"
@@ -14,7 +15,7 @@
 // char debug_buf[4096];
 
 // Глобальные переменные, которые могут потребоваться везде
-TCHAR *MHAppName = L"Из мыши в клавиатуру V2 28.07";
+const wchar_t *MHAppName = L"Из мыши в клавиатуру V2 28.07";
 HINSTANCE MHInst;
 HWND MHhwnd = NULL;
 HBRUSH green_brush, yellow_brush, red_brush, blue_brush, brushes[4];
@@ -43,7 +44,7 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR cline, INT)
   ATOM aresult;  // Для всяких кодов возврата
   BOOL boolresult;
   MSG msg;  // Сообщение
-  TCHAR *MHWindowCName = L"MHook20";
+  const wchar_t *MHWindowCName = L"MHook20";
   RECT rect = {0, 0, MH_WINDOW_SIZE, MH_WINDOW_SIZE};
 
   // Делаем hInst доступной для всех

@@ -1,12 +1,13 @@
-﻿#include "hh3.h"
-#include <Windows.h>
+﻿#include <Windows.h>
+
 #include "MHKeypad.h"
 #include "MVector.h"
 #include "Settings.h"
+#include "hh3.h"
 
 #ifdef _DEBUG
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
 TCHAR debug_buf[4096];
 #endif
 

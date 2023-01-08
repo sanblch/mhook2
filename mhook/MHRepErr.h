@@ -10,19 +10,19 @@
 //#include "tobiigaze_error_codes.h"
 //#include "tobiigaze.h"
 
-void MHReportError(TCHAR *SourceFile,
-                   TCHAR *FuncName,
+void MHReportError(const wchar_t *SourceFile,
+                   const wchar_t *FuncName,
                    int LineNumber,
                    HWND hwnd = NULL);
-void MHReportError(TCHAR *Error,
+void MHReportError(const wchar_t *Error,
                    HWND hwnd = NULL);  // Для НЕсистемных ошибок (перегружена)
 // void MHReportError(tobiigaze_error_code tbg_error_code, TCHAR *SourceFile,
 // TCHAR *FuncName, int LineNumber, HWND hwnd=NULL); // Для ошибок Tobii Gaze
 // SDK (перегружена)
 void MHReportError(
     int tbg_error_code,
-    TCHAR *SourceFile,
-    TCHAR *FuncName,
+    const wchar_t *SourceFile,
+    const wchar_t *FuncName,
     int LineNumber,
     HWND hwnd = NULL);  // Для ошибок Tobii Gaze SDK (перегружена)
 
