@@ -198,34 +198,45 @@ void KChFstate::NewFrame(int energy_level) {
 // SendInput содран из Mhook
 //=========================================================================================
 void KChFstate::MM_KeyDown(int i) {
-  INPUT input = {0};
+  INPUT input[2] = {0};
+  int cnt = 1;
 
   if (key_to_press[i] >= 0xFF00)  // Спец.случай. нажатие на кнопки мыши
   {
-    input.type = INPUT_MOUSE;
+    input[0].type = INPUT_MOUSE;
 
     if (0xFF00 == key_to_press[i]) {  // левая
-      input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
+      input[0].mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
     } else if (0xFF01 == key_to_press[i]) {  // правая
-      input.mi.dwFlags = MOUSEEVENTF_RIGHTDOWN;
+      input[0].mi.dwFlags = MOUSEEVENTF_RIGHTDOWN;
     } else if (0xFF02 == key_to_press[i]) {  // средняя
-      input.mi.dwFlags = MOUSEEVENTF_MIDDLEDOWN;
+      input[0].mi.dwFlags = MOUSEEVENTF_MIDDLEDOWN;
     }
   } else  // клавиатура
   {
-    input.type = INPUT_KEYBOARD;
-    input.ki.dwFlags = KEYEVENTF_SCANCODE;
+    input[0].type = INPUT_KEYBOARD;
+    input[0].ki.dwFlags = KEYEVENTF_SCANCODE;
 
     if (key_to_press[i]
         > 0xFF)  // Этот скан-код из двух байтов, где первый - E0
     {
-      input.ki.dwFlags |= KEYEVENTF_EXTENDEDKEY;
+      input[0].ki.dwFlags |= KEYEVENTF_EXTENDEDKEY;
     }
 
-    input.ki.wScan = key_to_press[i];
+    input[0].ki.wScan = key_to_press[i];
+
+    // Press space after / and G
+    if (key_to_press[i] == 0x2B || key_to_press[i] == 0x22)
+    {
+      cnt = 2;
+      input[1].type = INPUT_KEYBOARD;
+      input[1].ki.dwFlags = KEYEVENTF_SCANCODE;
+      input[1].ki.wScan = 0x39;
+    }
+
   }
 
-  SendInput(1, &input, sizeof(INPUT));
+  SendInput(cnt, input, sizeof(INPUT));
 }
 
 //=========================================================================================
@@ -233,33 +244,45 @@ void KChFstate::MM_KeyDown(int i) {
 // SendInput содран из Mhook
 //=========================================================================================
 void KChFstate::MM_KeyUp(int i) {
-  INPUT input = {0};
+  INPUT input[2] = {0};
+  int cnt = 1;
+
   if (key_to_press[i] >= 0xFF00)  // Спец.случай. нажатие на кнопки мыши
   {
-    input.type = INPUT_MOUSE;
+    input[0].type = INPUT_MOUSE;
 
     if (0xFF00 == key_to_press[i]) {  // левая
-      input.mi.dwFlags = MOUSEEVENTF_LEFTUP;
+      input[0].mi.dwFlags = MOUSEEVENTF_LEFTUP;
     } else if (0xFF01 == key_to_press[i]) {  // правая
-      input.mi.dwFlags = MOUSEEVENTF_RIGHTUP;
+      input[0].mi.dwFlags = MOUSEEVENTF_RIGHTUP;
     } else if (0xFF02 == key_to_press[i]) {  // средняя
-      input.mi.dwFlags = MOUSEEVENTF_MIDDLEUP;
+      input[0].mi.dwFlags = MOUSEEVENTF_MIDDLEUP;
     }
   } else  // клавиатура
   {
-    input.type = INPUT_KEYBOARD;
-    input.ki.dwFlags = KEYEVENTF_SCANCODE | KEYEVENTF_KEYUP;
+    input[0].type = INPUT_KEYBOARD;
+    input[0].ki.dwFlags = KEYEVENTF_SCANCODE | KEYEVENTF_KEYUP;
 
     if (key_to_press[i]
         > 0xFF)  // Этот скан-код из двух байтов, где первый - E0
     {
-      input.ki.dwFlags |= KEYEVENTF_EXTENDEDKEY;
+      input[0].ki.dwFlags |= KEYEVENTF_EXTENDEDKEY;
     }
 
-    input.ki.wScan = key_to_press[i];
+    input[0].ki.wScan = key_to_press[i];
+
+    // Press space after / and G
+    if (key_to_press[i] == 0x2B || key_to_press[i] == 0x22) 
+    {
+      cnt = 2;
+      input[1].type = INPUT_KEYBOARD;
+      input[1].ki.dwFlags = KEYEVENTF_SCANCODE | KEYEVENTF_KEYUP;
+      input[1].ki.wScan = 0x39;
+    }
+
   }
 
-  SendInput(1, &input, sizeof(INPUT));
+  SendInput(cnt, input, sizeof(INPUT));
 }
 
 //=========================================================================================
