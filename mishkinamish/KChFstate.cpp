@@ -231,7 +231,7 @@ void KChFstate::MM_KeyDown(int i) {
       cnt = 2;
       input[1].type = INPUT_KEYBOARD;
       input[1].ki.dwFlags = KEYEVENTF_SCANCODE;
-      input[1].ki.wScan = 0x39;
+      input[1].ki.wScan = 0x03;
     }
 
   }
@@ -277,7 +277,7 @@ void KChFstate::MM_KeyUp(int i) {
       cnt = 2;
       input[1].type = INPUT_KEYBOARD;
       input[1].ki.dwFlags = KEYEVENTF_SCANCODE | KEYEVENTF_KEYUP;
-      input[1].ki.wScan = 0x39;
+      input[1].ki.wScan = 0x03;
     }
 
   }
