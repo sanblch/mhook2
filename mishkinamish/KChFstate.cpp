@@ -198,45 +198,7 @@ void KChFstate::NewFrame(int energy_level) {
 // SendInput содран из Mhook
 //=========================================================================================
 void KChFstate::MM_KeyDown(int i) {
-  INPUT input[2] = {0};
-  int cnt = 1;
-
-  if (key_to_press[i] >= 0xFF00)  // Спец.случай. нажатие на кнопки мыши
-  {
-    input[0].type = INPUT_MOUSE;
-
-    if (0xFF00 == key_to_press[i]) {  // левая
-      input[0].mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
-    } else if (0xFF01 == key_to_press[i]) {  // правая
-      input[0].mi.dwFlags = MOUSEEVENTF_RIGHTDOWN;
-    } else if (0xFF02 == key_to_press[i]) {  // средняя
-      input[0].mi.dwFlags = MOUSEEVENTF_MIDDLEDOWN;
-    }
-  } else  // клавиатура
-  {
-    input[0].type = INPUT_KEYBOARD;
-    input[0].ki.dwFlags = KEYEVENTF_SCANCODE;
-
-    if (key_to_press[i]
-        > 0xFF)  // Этот скан-код из двух байтов, где первый - E0
-    {
-      input[0].ki.dwFlags |= KEYEVENTF_EXTENDEDKEY;
-    }
-
-    input[0].ki.wScan = key_to_press[i];
-
-    // Press space after / and G
-    if (key_to_press[i] == 0x2B || key_to_press[i] == 0x22)
-    {
-      cnt = 2;
-      input[1].type = INPUT_KEYBOARD;
-      input[1].ki.dwFlags = KEYEVENTF_SCANCODE;
-      input[1].ki.wScan = 0x03;
-    }
-
-  }
-
-  SendInput(cnt, input, sizeof(INPUT));
+  MM_Key(i, KChFstate::Direction::DOWN);
 }
 
 //=========================================================================================
@@ -244,7 +206,29 @@ void KChFstate::MM_KeyDown(int i) {
 // SendInput содран из Mhook
 //=========================================================================================
 void KChFstate::MM_KeyUp(int i) {
-  INPUT input[2] = {0};
+  MM_Key(i, KChFstate::Direction::UP);
+}
+
+INPUT createKey(WORD code, KChFstate::Direction dir) {
+  INPUT input{};
+  input.type = INPUT_KEYBOARD;
+  input.ki.dwFlags = KEYEVENTF_SCANCODE;
+  if (dir == KChFstate::Direction::UP) {
+    input.ki.dwFlags |= KEYEVENTF_KEYUP;
+  }
+
+  if (code > 0xFF)  // Этот скан-код из двух байтов, где первый - E0
+  {
+    input.ki.dwFlags |= KEYEVENTF_EXTENDEDKEY;
+  }
+
+  input.ki.wScan = code;
+
+  return input;
+}
+
+void KChFstate::MM_Key(int i, Direction dir) {
+  INPUT input[3] = {0};
   int cnt = 1;
 
   if (key_to_press[i] >= 0xFF00)  // Спец.случай. нажатие на кнопки мыши
@@ -252,34 +236,30 @@ void KChFstate::MM_KeyUp(int i) {
     input[0].type = INPUT_MOUSE;
 
     if (0xFF00 == key_to_press[i]) {  // левая
-      input[0].mi.dwFlags = MOUSEEVENTF_LEFTUP;
+      input[0].mi.dwFlags = (dir == UP ? MOUSEEVENTF_LEFTUP : MOUSEEVENTF_LEFTDOWN);
     } else if (0xFF01 == key_to_press[i]) {  // правая
-      input[0].mi.dwFlags = MOUSEEVENTF_RIGHTUP;
+      input[0].mi.dwFlags = (dir == UP ? MOUSEEVENTF_RIGHTUP : MOUSEEVENTF_RIGHTDOWN);
     } else if (0xFF02 == key_to_press[i]) {  // средняя
-      input[0].mi.dwFlags = MOUSEEVENTF_MIDDLEUP;
+      input[0].mi.dwFlags = (dir == UP ? MOUSEEVENTF_MIDDLEUP : MOUSEEVENTF_MIDDLEDOWN);
     }
   } else  // клавиатура
   {
-    input[0].type = INPUT_KEYBOARD;
-    input[0].ki.dwFlags = KEYEVENTF_SCANCODE | KEYEVENTF_KEYUP;
-
-    if (key_to_press[i]
-        > 0xFF)  // Этот скан-код из двух байтов, где первый - E0
-    {
-      input[0].ki.dwFlags |= KEYEVENTF_EXTENDEDKEY;
-    }
-
-    input[0].ki.wScan = key_to_press[i];
+    input[0] = createKey(key_to_press[i], dir);
 
     // Press space after / and G
-    if (key_to_press[i] == 0x2B || key_to_press[i] == 0x22) 
+    if (key_to_press[i] == 0x22) 
     {
       cnt = 2;
-      input[1].type = INPUT_KEYBOARD;
-      input[1].ki.dwFlags = KEYEVENTF_SCANCODE | KEYEVENTF_KEYUP;
-      input[1].ki.wScan = 0x03;
+      input[1] = createKey(0x39, dir);
     }
 
+    // Press 1 and 2 after / and G
+    if (key_to_press[i] == 0x2B) 
+    {
+      cnt = 3;
+      input[1] = createKey(0x03, dir);
+      input[2] = createKey(0x02, dir);
+    }
   }
 
   SendInput(cnt, input, sizeof(INPUT));

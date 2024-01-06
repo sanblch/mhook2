@@ -5,6 +5,12 @@
 
 class KChFstate {
  public:
+
+  enum Direction {
+      UP,
+      DOWN,
+  };
+
   static void NewFrame(int energy_level);
   static bool IsKCValid();  // может ли к или Ч быть рассмотрена кандидатом на
                             // нажатие (в нужное ли время ?)
@@ -37,7 +43,9 @@ class KChFstate {
   static void MM_KeyDown(
       int i);  // Вспомогательная функция для нажатия на клавишу
   static void MM_KeyUp(
-      int i);  // Вспомогательная функция для отпускания клавиши
+      int i);  // Вспомогательная функция для отпускания клавишу
+
+  static void MM_Key(int i, Direction dir);
 };
 
 #endif

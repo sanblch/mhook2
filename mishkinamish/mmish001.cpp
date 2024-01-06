@@ -183,7 +183,7 @@ MHWORDChar dlg_scancodes[MH_NUM_SCANCODES] = {
     {L"D", 0x20},
     {L"E", 0x12},  // 5-9
     {L"F", 0x21},
-    {L"CS2 G+2", 0x22},
+    {L"CS2 G+пробел", 0x22},
     {L"H", 0x23},
     {L"I", 0x17},
     {L"J", 0x24},  // 10-14
@@ -216,7 +216,7 @@ MHWORDChar dlg_scancodes[MH_NUM_SCANCODES] = {
     {L"~", 0x29},
     {L"-", 0x0C},
     {L"=", 0x0D},
-    {L"POE \\+2", 0x2B},  // 40-44
+    {L"POE \\+2+1", 0x2B},  // 40-44
     {L"[", 0x1A},
     {L"]", 0x1B},
     {L";", 0x27},
