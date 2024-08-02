@@ -231,35 +231,35 @@ void KChFstate::MM_Key(int i, Direction dir) {
   INPUT input[3] = {0};
   int cnt = 1;
 
-  if (key_to_press[i] >= 0xFF00)  // Спец.случай. нажатие на кнопки мыши
+  if (GetKeyToPress(i) >= 0xFF00)  // Спец.случай. нажатие на кнопки мыши
   {
     input[0].type = INPUT_MOUSE;
 
-    if (0xFF00 == key_to_press[i]) {  // левая
+    if (0xFF00 == GetKeyToPress(i)) {  // левая
       input[0].mi.dwFlags = (dir == UP ? MOUSEEVENTF_LEFTUP : MOUSEEVENTF_LEFTDOWN);
-    } else if (0xFF01 == key_to_press[i]) {  // правая
+    } else if (0xFF01 == GetKeyToPress(i)) {  // правая
       input[0].mi.dwFlags = (dir == UP ? MOUSEEVENTF_RIGHTUP : MOUSEEVENTF_RIGHTDOWN);
-    } else if (0xFF02 == key_to_press[i]) {  // средняя
+    } else if (0xFF02 == GetKeyToPress(i)) {  // средняя
       input[0].mi.dwFlags = (dir == UP ? MOUSEEVENTF_MIDDLEUP : MOUSEEVENTF_MIDDLEDOWN);
     }
   } else  // клавиатура
   {
-    input[0] = createKey(key_to_press[i], dir);
+    input[0] = createKey(GetKeyToPress(i), dir);
 
     // Press space after / and G
-    if (key_to_press[i] == 0x22) 
+    if (GetKeyToPress(i) == 0x22) 
     {
       cnt = 2;
       input[1] = createKey(0x39, dir);
     }
 
     // Press 1 and 2 after / and G
-    if (key_to_press[i] == 0x2B) 
+    /* if (GetKeyToPress(i) == 0x2B) 
     {
       cnt = 3;
       input[1] = createKey(0x03, dir);
       input[2] = createKey(0x02, dir);
-    }
+    }*/
   }
 
   SendInput(cnt, input, sizeof(INPUT));
@@ -274,7 +274,7 @@ LONG KChFstate::TryToPress(int i, LONG move) {
   if (i < 0 || i > 5) return move;
 
   // Возможно, клавишу с номером i мы вообще не нажимаем...
-  if (key_to_press[i] == 0xffff) return move;
+  if (GetKeyToPress(i) == 0xffff) return move;
 
   // счётчик. один тик=1/10 секунды. переключатель можно отменить через 2 тика
   // (1/5 секунды)
@@ -288,7 +288,7 @@ LONG KChFstate::TryToPress(int i, LONG move) {
                           //Пусть это будет 3
   {
     if (move > 3) {
-      if (toggle_key[i]
+      if (GetToggleKey(i)
           && (key_cycle_counter[i]
               > 0))  // не отстоялся, чтобы переключиться. Взбаламутили снова
       {
@@ -301,13 +301,13 @@ LONG KChFstate::TryToPress(int i, LONG move) {
     }
   } else if (1 == key_state[i])  // 1 - Клавиша нажата
   {
-    if ((move > 0) && (toggle_key[i]))  // переключатель пытаются подтолкнуть
+    if ((move > 0) && GetToggleKey(i))  // переключатель пытаются подтолкнуть
     {
       if (key_cycle_counter[i]
           > 0)  // не отстоялся, чтобы выключиться. Взбаламутили снова
       {
         key_cycle_counter[i] = 2;
-        if (repeat_key[i])  // но автоповтор работает
+        if (GetRepeatKey(i))  // но автоповтор работает
         {
           MM_KeyUp(i);
           key_state[i] = 2;
@@ -318,15 +318,16 @@ LONG KChFstate::TryToPress(int i, LONG move) {
         key_state[i] = 0;
         key_cycle_counter[i] = 2;
       }
-    } else if (((0 == move) || (repeat_key[i]))
-               && (!toggle_key[i]))  // Отжимаем её, только если вообще не было
+    } else if (((0 == move) || (GetRepeatKey(i)))
+               && (!GetToggleKey(i)))  // Отжимаем её, только если вообще не
+                                       // было
                                      // признаков этого звука (move==0) или
                                      // [25-AUG-2017] пришло время отжатия для
                                      // повтора
     {
       MM_KeyUp(i);
       key_state[i] = 0;  // Клавиша отжата
-    } else if ((repeat_key[i]) && (toggle_key[i]))  // временно отжимаем
+    } else if (GetRepeatKey(i) && GetToggleKey(i))  // временно отжимаем
     {
       MM_KeyUp(i);
       key_state[i] = 2;
