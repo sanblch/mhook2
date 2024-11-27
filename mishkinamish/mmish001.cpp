@@ -216,7 +216,7 @@ MHWORDChar dlg_scancodes[MH_NUM_SCANCODES] = {
     {L"~", 0x29},
     {L"-", 0x0C},
     {L"=", 0x0D},
-    {L"POE \\+2+1", 0x2B},  // 40-44
+    {L"\\", 0x2B},  // 40-44
     {L"[", 0x1A},
     {L"]", 0x1B},
     {L";", 0x27},
@@ -298,8 +298,9 @@ static void SetKeysInDialogue() {
 
   for (i = 0; i < 6; i++) {
     found = false;
+    WORD key = KChFstate::GetKeyToPress(i);
     for (j = 0; j < MH_NUM_SCANCODES; j++) {
-      if (KChFstate::key_to_press[i] == dlg_scancodes[j].value) {
+      if (key == dlg_scancodes[j].value) {
         found = true;
         SendDlgItemMessage(
             hdwnd,
@@ -318,12 +319,12 @@ static void SetKeysInDialogue() {
 
   // Теперь чекбоксы "повтор" и "залипание"
   for (i = 0; i < 4; i++) {
-    if (KChFstate::repeat_key[i])  // Корректируем галочку в диалоге
+    if (KChFstate::GetRepeatKey(i))  // Корректируем галочку в диалоге
       SendDlgItemMessage(hdwnd, listbox2[i], BM_SETCHECK, BST_CHECKED, 0);
     else
       SendDlgItemMessage(hdwnd, listbox2[i], BM_SETCHECK, BST_UNCHECKED, 0);
 
-    if (KChFstate::toggle_key[i])  // Корректируем галочку в диалоге
+    if (KChFstate::GetToggleKey(i))  // Корректируем галочку в диалоге
       SendDlgItemMessage(hdwnd, listbox3[i], BM_SETCHECK, BST_CHECKED, 0);
     else
       SendDlgItemMessage(hdwnd, listbox3[i], BM_SETCHECK, BST_UNCHECKED, 0);
@@ -500,12 +501,21 @@ static BOOL CALLBACK DlgWndProc(HWND hdwnd,
   PAINTSTRUCT ps;
   WAVEINCAPS wic;
   unsigned long i;
+  static WORD ctrl_key = 0;
 
   switch (uMsg) {
     case WM_TIMER:  // Рисуем индикатор уровня и прочее
       hdc = GetDC(hdwnd);
       Indicators::Draw(hdc);
       ReleaseDC(hdwnd, hdc);
+      { 
+        WORD new_ctrl_key = GetKeyState(VK_CONTROL);
+        if (new_ctrl_key != ctrl_key) {
+          ctrl_key = new_ctrl_key;
+          SetKeysInDialogue();
+        }
+
+      }
       return 1;
 
     case WM_PAINT:

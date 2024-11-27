@@ -26,11 +26,40 @@ class KChFstate {
   static void SetKeyToPress(int i, WORD key) {
     if ((i >= 0) && (i < 6)) key_to_press[i] = key;
   }
+  static WORD GetKeyToPress(int i) {
+    if ((i >= 0) && (i < 6)) {
+      if (i == 0 && (GetKeyState(VK_CONTROL) & 0x8000)) {
+        return 0xFF00;
+      }
+      return key_to_press[i];
+    }
+    return 0xffff;
+  }
+  static char GetRepeatKey(int i) {
+    if ((i >= 0) && (i < 6)) {
+      if (i == 0 && (GetKeyState(VK_CONTROL) & 0x8000))
+      {
+        return (char) 1;
+      }
+      return repeat_key[i];
+    }
+    return 0;
+  }
   static void SetRepeatKey(int i, char repeat) {
     if ((i >= 0) && (i < 6)) repeat_key[i] = repeat;
   }
   static void SetToggleKey(int i, char toggle) {
     if ((i >= 0) && (i < 6)) toggle_key[i] = toggle;
+  } 
+  static char GetToggleKey(int i) {
+    if ((i >= 0) && (i < 6)) {
+      char toggle = toggle_key[i];
+      if (i == 0 && (GetKeyState(VK_CONTROL) & 0x8000)) {
+        return (char) 0;
+      }
+      return toggle_key[i];
+    }
+    return 0;
   }
   static LONG TryToPress(int i, LONG move);
 
